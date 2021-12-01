@@ -1,9 +1,9 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 
 const resolve = (dir: string) => path.resolve(__dirname, dir)
-// https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
     alias: {
@@ -11,14 +11,11 @@ export default defineConfig({
     }
   },
   server: {
-    port: 8080, //项目启动端口
-    open: true, //项目启动时是否自动打开浏览器
+    port: 3000,
+    open: true,
     proxy: {
-      // 代理
-      '/foo': 'http://localhost:4567/', //代理方式 /foo --> http://localhost:4567/foo
-      // 选项写法
       '/api': {
-        target: 'http://123.456.com', //代理方式 /api --> http://123.456.com
+        target: 'http://v.juhe.cn',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       }
@@ -27,5 +24,5 @@ export default defineConfig({
   build: {
     outDir: resolve('./dist') // 打包输出目录， 默认dist
   },
-  plugins: [vue()]
+  plugins: [vue(), vueJsx()]
 })
