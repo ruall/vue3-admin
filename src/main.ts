@@ -7,6 +7,8 @@ import App from './App.vue'
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 
+import OrangeUI from './libs/orange-ui'
+
 const app = createApp(App)
 
-app.use(router).use(Antd).use(store).mount('#app')
+app.use(router).use(Antd).use(OrangeUI).use(store).mount('#app')

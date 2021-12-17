@@ -7,7 +7,7 @@ const resolve = (dir: string) => path.resolve(__dirname, dir)
 export default defineConfig({
   resolve: {
     alias: {
-      '@': resolve('./src')
+      '/@': resolve('./src')
     }
   },
   server: {

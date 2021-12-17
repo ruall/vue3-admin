@@ -8,7 +8,7 @@
 </template>
 <script setup lang="ts">
 import { useStore } from 'vuex'
-import style from '@/assets/style.module.less'
+import style from '/@/assets/style.module.less'
 import { getWeather } from '../../utils/request'
 
 enum Gender {
@@ -24,8 +24,8 @@ const handleClickIncrement = () => {
   store.dispatch('increment')
 }
 
-const data = await getWeather()
-console.log(data)
+// const weather = await getWeather()
+// console.log(weather)
 </script>
 <style module>
 .name {
