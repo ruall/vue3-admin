@@ -3,9 +3,9 @@
   <router-link to="/login">登录</router-link>
   <div class="container">
     <Carousel :autoplay="true" :duration="3000" :initial="0" :hasDot="true" :hasDirector="true">
-      <CarouselItem v-for="(item, index) in carouselData" :key="index">
+      <carouselItem v-for="(item, index) in carouselData" :key="index">
         <img :src="`./src/assets/${item.img_name}`" />
-      </CarouselItem>
+      </carouselItem>
     </Carousel>
   </div>
 </template>
