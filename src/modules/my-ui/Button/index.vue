@@ -1,5 +1,5 @@
 <template>
-  <button :class="['my-btn', type]"><slot></slot></button>
+  <button :class="['my-btn', type]" @click="btnClick($event)"><slot></slot></button>
 </template>
 
 <script lang="ts">
@@ -11,6 +11,10 @@ export default {
 defineProps({
   type: String
 })
+const emit = defineEmits(['click'])
+const btnClick = (e: any) => {
+  emit('click', e)
+}
 </script>
 <style lang="less" scoped>
 .my-btn {
@@ -18,6 +22,7 @@ defineProps({
   padding: 15px;
   border: 1px solid #ddd;
   background-color: #fff;
+  box-sizing: unset;
   &.primary {
     border: 1px solid #ddd;
     background-color: pink;

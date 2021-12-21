@@ -11,11 +11,14 @@ import 'ant-design-vue/dist/antd.css'
 import OrangeUI from './libs/orange-ui'
 
 import MyUI from './modules/my-ui'
+import { MyButton } from './modules/my-ui'
 import './modules/my-ui/common.css'
 
 const app = createApp(App)
 
 app.use(MyUI, {
-  components: ['MyButton', 'MyInput']
+  components: ['MyInput']
 })
+
+app.use(MyButton)
 app.use(router).use(Antd).use(OrangeUI).use(store).mount('#app')

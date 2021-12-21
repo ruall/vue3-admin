@@ -76,7 +76,6 @@ const autoPlay = () => {
   if (proxy?.props.autoplay) {
     t = setInterval(() => {
       setIndex('next')
-      console.log(1)
       //@ts-ignore
     }, proxy?.props.duration)
   }

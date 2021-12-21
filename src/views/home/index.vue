@@ -1,5 +1,7 @@
 <template>
-  <my-btn>我的按钮</my-btn>
+  <MyButton type="primary" @click="btnClick">我的按钮</MyButton>
+  <hr />
+  <MyInput placeholder="我的输入框" value="123" />
 
   <div>vuex中count:{{ count }}</div>
   <router-link to="/login">登录</router-link>
@@ -18,6 +20,11 @@ import carouselData from '../../data/carousel'
 
 const store = useStore()
 const count = store.state.count
+
+const btnClick = (e: object) => {
+  console.log(e)
+  console.log('我的按钮')
+}
 </script>
 
 <style lang="less" scoped>
