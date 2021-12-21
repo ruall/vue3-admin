@@ -1,5 +1,5 @@
 <template>
-  <transition>
+  <transition :name="setName">
     <div class="carousel-item" v-if="selfIndex === currentIndex">
       <slot></slot>
     </div>
@@ -11,7 +11,7 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import { getCurrentInstance, reactive, toRefs, useSlots } from 'vue'
+import { getCurrentInstance, reactive, ref, toRefs, watch } from 'vue'
 const instance = getCurrentInstance()
 
 const state = reactive({
@@ -20,6 +20,16 @@ const state = reactive({
   currentIndex: instance?.parent?.exposed.currentIndex
 })
 const { selfIndex, currentIndex } = toRefs(state)
+
+const setName = ref('')
+
+watch(currentIndex, (val, oldval) => {
+  if (val > oldval) {
+    setName.value = 'next'
+  } else {
+    setName.value = 'prev'
+  }
+})
 </script>
 <style lang="less">
 .carousel-item {
@@ -29,21 +39,38 @@ const { selfIndex, currentIndex } = toRefs(state)
   width: 100%;
   height: 100%;
 }
-.v-enter-active,
-.v-leave-active {
+.next-enter-active,
+.next-leave-active {
   transition: all 0.3s linear;
 }
-.v-enter-active {
+.next-enter-active {
   transform: translateX(100%);
 }
-.v-enter-to {
+.next-enter-to {
   transform: translateX(0);
 }
-.v-leave-active {
+.next-leave-active {
   transform: translateX(0);
 }
-.v-leave-to {
+.next-leave-to {
   transform: translateX(-100%);
+}
+
+.prev-enter-active,
+.prev-leave-active {
+  transition: all 0.3s linear;
+}
+.prev-enter-active {
+  transform: translateX(-100%);
+}
+.prev-enter-to {
+  transform: translateX(0);
+}
+.prev-leave-to {
+  transform: translateX(0);
+}
+.prev-leave-active {
+  transform: translateX(100%);
 }
 
 img {

@@ -1,6 +1,15 @@
 <template>
-  <div class="carousel">
+  <div class="carousel" @mouseenter="mouseEnter" @mouseleave="mouseLeave">
     <div class="inner">
+      <CarDot
+        :hasDot="hasDot"
+        :itemLen="itemLen"
+        :currentIndex="currentIndex"
+        :dotBgColor="dotBgColor"
+        @dotClick="dotClick"
+      />
+      <Director dir="prev" @dirClick="dirClick" />
+      <Director dir="next" @dirClick="dirClick" />
       <slot></slot>
     </div>
   </div>
@@ -14,6 +23,8 @@ export default {
 
 <script setup lang="ts">
 import { getCurrentInstance, reactive, toRefs, onMounted, onUnmounted, useSlots } from 'vue'
+import CarDot from './dot.vue'
+import Director from './director.vue'
 
 defineProps({
   autoplay: {
@@ -40,6 +51,11 @@ defineProps({
     //是否显示方向指示器
     type: Boolean,
     default: true
+  },
+  dotBgColor: {
+    //小圆点背景色
+    type: String,
+    default: '#ff5000'
   }
 })
 
@@ -48,10 +64,10 @@ const proxy = getCurrentInstance()
 const slots = useSlots()
 
 const state = reactive({
-  currentIndex: proxy?.props.initial,
+  currentIndex: <any>proxy?.props.initial,
   itemLen: 0
 })
-const { currentIndex } = toRefs(state)
+const { currentIndex, itemLen } = toRefs(state)
 defineExpose({ currentIndex })
 
 let t: any = null
@@ -59,7 +75,7 @@ let t: any = null
 const autoPlay = () => {
   if (proxy?.props.autoplay) {
     t = setInterval(() => {
-      setIndex('prev')
+      setIndex('next')
       console.log(1)
       //@ts-ignore
     }, proxy?.props.duration)
@@ -87,6 +103,27 @@ const setIndex = (dir: string) => {
   }
 }
 
+const dotClick = (index: number) => {
+  state.currentIndex = index
+}
+
+const mouseEnter = () => {
+  _clearIntervalFn()
+}
+
+const mouseLeave = () => {
+  autoPlay()
+}
+
+function _clearIntervalFn() {
+  clearInterval(t)
+  t = null
+}
+
+const dirClick = (dir: string) => {
+  setIndex(dir)
+}
+
 onMounted(() => {
   //@ts-ignore
   state.itemLen = slots?.default()[0].children.length
@@ -94,8 +131,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  clearInterval(t)
-  t = null
+  _clearIntervalFn()
 })
 </script>
 <style lang="less" scoped>

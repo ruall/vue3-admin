@@ -7,8 +7,15 @@ import App from './App.vue'
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 
+//自定义组件库
 import OrangeUI from './libs/orange-ui'
+
+import MyUI from './modules/my-ui'
+import './modules/my-ui/common.css'
 
 const app = createApp(App)
 
+app.use(MyUI, {
+  components: ['MyButton', 'MyInput']
+})
 app.use(router).use(Antd).use(OrangeUI).use(store).mount('#app')
