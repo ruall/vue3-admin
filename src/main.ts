@@ -17,7 +17,7 @@ import './modules/my-ui/common.css'
 const app = createApp(App)
 
 app.use(MyUI, {
-  components: ['MyInput']
+  components: ['MyInput', 'MySelect']
 })
 
 app.use(MyButton)

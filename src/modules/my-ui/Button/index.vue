@@ -8,12 +8,15 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-defineProps({
-  type: String
+const props = defineProps({
+  type: String,
+  callback: Function
 })
 const emit = defineEmits(['click'])
 const btnClick = (e: any) => {
   emit('click', e)
+  //@ts-ignore
+  props.callback(e)
 }
 </script>
 <style lang="less" scoped>
