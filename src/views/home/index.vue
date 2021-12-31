@@ -86,6 +86,10 @@ var object = { user: 'fred' }
 
 var bound = _.bind(greet, object, 'hey')
 console.log(bound('!!'))
+
+var func = _.nthArg(-3)
+
+console.log(func('a', 'b', 'c', 'd'))
 </script>
 
 <style lang="less" scoped>
