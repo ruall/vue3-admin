@@ -22,6 +22,7 @@
 import { reactive, ref } from 'vue'
 import { useStore } from 'vuex'
 import carouselData from '../../data/carousel'
+import _ from 'lodash'
 
 const store = useStore()
 const count = store.state.count
@@ -54,6 +55,37 @@ const curIndex = ref(1)
 const setOption = (index: any, item: any) => {
   console.log(index, item)
 }
+
+var users = [
+  { user: 'barney', active: true },
+  { user: 'fred', active: false }
+]
+const reduceFun = _.some(users, 'active')
+console.log(reduceFun)
+
+var saves = ['profile', 'settings']
+
+var done = _.after(saves.length + 2, function () {
+  console.log('done saving!')
+})
+_.forEach(saves, function (type) {
+  console.log({ type: type, complete: done() })
+})
+
+done()
+done()
+
+const arr = _.map(['6', '8', '10'], _.ary(parseInt, 1))
+console.log(arr)
+
+var greet = function (this: any, greeting: string, punctuation: string) {
+  return greeting + ' ' + this.user + punctuation
+}
+
+var object = { user: 'fred' }
+
+var bound = _.bind(greet, object, 'hey')
+console.log(bound('!!'))
 </script>
 
 <style lang="less" scoped>
