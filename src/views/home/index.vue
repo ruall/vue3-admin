@@ -1,6 +1,7 @@
 <template>
-  <MyButton type="warning" :callback="btnClick">我的按钮</MyButton>
-  <MyButton type="success" @click="btnClick">我的按钮1</MyButton>
+  <div>提交1</div>
+  <MyButton type="warning" :callback="btnClick">我的按钮1</MyButton>
+  <MyButton type="success" @click="btnClick">我的按钮2</MyButton>
   <hr />
   <MyInput placeholder="我的输入框" value="123" />
   <div class="my-select">
