@@ -1,4 +1,5 @@
 <template>
+  <div>提交1</div>
   <MyButton type="warning" :callback="btnClick">我的按钮1</MyButton>
   <MyButton type="success" @click="btnClick">我的按钮2</MyButton>
   <hr />
