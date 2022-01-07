@@ -14,5 +14,5 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   extends: ['plugin:@typescript-eslint/recommended', 'plugin:vue/vue3-recommended', 'plugin:prettier/recommended'],
-  rules: {}
+  rules: { '@typescript-eslint/ban-ts-comment': 'off' }
 }

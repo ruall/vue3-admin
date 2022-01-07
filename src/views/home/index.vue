@@ -4,16 +4,16 @@
   <hr />
   <MyInput placeholder="我的输入框" value="123" />
   <div class="my-select">
-    <MySelect :data="data" :currentIndex="curIndex" :callback="setOption" />
+    <MySelect :data="data" :current-index="curIndex" :callback="setOption" />
   </div>
 
   <div>vuex中count:{{ count }}</div>
   <router-link to="/login">登录</router-link>
 
   <div class="container">
-    <Carousel :autoplay="true" :duration="5000" :initial="0" :hasDot="true" :hasDirector="true" dotBgColor="#000">
+    <Carousel :autoplay="true" :duration="5000" :initial="0" :has-dot="true" :has-director="true" dot-bg-color="#000">
       <carouselItem v-for="(item, index) in carouselData" :key="index">
-        <img :src="`./src/assets/${item.img_name}`" />
+        <img :src="`./src/assets/${item.img_name}`" alt="" />
       </carouselItem>
     </Carousel>
   </div>
@@ -56,16 +56,16 @@ const setOption = (index: any, item: any) => {
   console.log(index, item)
 }
 
-var users = [
+const users = [
   { user: 'barney', active: true },
   { user: 'fred', active: false }
 ]
 const reduceFun = _.some(users, 'active')
 console.log(reduceFun)
 
-var saves = ['profile', 'settings']
+const saves = ['profile', 'settings']
 
-var done = _.after(saves.length + 2, function () {
+const done = _.after(saves.length + 2, function () {
   console.log('done saving!')
 })
 _.forEach(saves, function (type) {
@@ -78,16 +78,16 @@ done()
 const arr = _.map(['6', '8', '10'], _.ary(parseInt, 1))
 console.log(arr)
 
-var greet = function (this: any, greeting: string, punctuation: string) {
+const greet = function (this: any, greeting: string, punctuation: string) {
   return greeting + ' ' + this.user + punctuation
 }
 
-var object = { user: 'fred' }
+const object = { user: 'fred' }
 
-var bound = _.bind(greet, object, 'hey')
+const bound = _.bind(greet, object, 'hey')
 console.log(bound('!!'))
 
-var func = _.nthArg(-3)
+const func = _.nthArg(-3)
 
 console.log(func('a', 'b', 'c', 'd'))
 </script>
