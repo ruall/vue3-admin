@@ -10,7 +10,7 @@
 import { defineComponent, ref, reactive, toRefs } from 'vue'
 
 export default defineComponent({
-  name: '',
+  name: 'MyChild',
   setup() {
     const count = ref(1)
     const data = reactive({
