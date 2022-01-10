@@ -1,5 +1,5 @@
 <template>
-  <son v-model="state.name" v-model:age="state.age" ref="childRef"></son>
+  <son ref="childRef" v-model="state.name" v-model:age="state.age"></son>
   <br />
   <span>age值为：{{ state.age }}</span>
 </template>
