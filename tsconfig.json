@@ -10,7 +10,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "strictNullChecks": true,
-    "lib": ["esnext", "dom"],
+    "lib": ["esnext", "dom", "ES2015"],
     "types": ["vite/client"]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
