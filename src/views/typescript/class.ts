@@ -141,6 +141,57 @@ const clsFun = () => {
   //const P5 = new Pg() // err:无法创建抽象类的实例。
   const p5 = new Ph()
   p5.speak() // 哈哈哈
+
+  class Pj {
+    speak(word: string): string {
+      return '🐒' + word
+    }
+  }
+
+  class Pk extends Pj {
+    speak(word: string): string {
+      return '🐔' + word
+    }
+  }
+  const p6 = new Pk()
+  console.log(p6.speak('咯咯咯')) // 🐔咯咯咯
+
+  function double(val: string): string
+  function double(val: number): number
+  function double(val: any): any {
+    if (typeof val === 'number') {
+      return val * 2
+    }
+    return val + val
+  }
+  const r1 = double(1)
+  console.log(r1) // 2
+
+  const r2 = double('a')
+  console.log(r2) // aa
+
+  abstract class Pl {
+    abstract sleep(): void
+  }
+  class Pi extends Pl {
+    sleep(): void {
+      console.log('呼呼呼呼')
+    }
+  }
+
+  class Pm extends Pl {
+    sleep(): void {
+      console.log('呼噜呼噜')
+    }
+  }
+  const p7 = new Pi()
+  const p8 = new Pm()
+
+  const p9: Pl[] = [p7, p8]
+  p9.forEach((item) => {
+    item.sleep()
+  })
+  // 呼呼呼呼  呼噜呼噜
 }
 
 export { clsFun }
