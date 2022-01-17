@@ -7,7 +7,9 @@ import { tsFun } from './index'
 import { clsFun } from './class'
 // import { fun } from './interface'
 import { fun } from './t'
+import { test } from './test'
 // tsFun()
-fun()
+// fun()
+test()
 // clsFun()
 </script>
