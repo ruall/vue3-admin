@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import router from './router/index'
 import store from './store/index'
+import auth from './components/directive'
 import App from './App.vue'
 // Jsx 写法
 // import App from './App.jsx'
@@ -21,4 +22,4 @@ app.use(MyUI, {
 })
 
 app.use(MyButton)
-app.use(router).use(Antd).use(OrangeUI).use(store).mount('#app')
+app.use(router).use(Antd).use(OrangeUI).use(store).use(auth).mount('#app')
