@@ -1,7 +1,10 @@
 <template>
   <div class="title">{{ title }}</div>
-  <div v-color="'red'">{{ props.title }}</div>
-  <button @click="add">add</button>
+  <div v-color="color">{{ props.title }}</div>
+  <button @click="changeColor">changeColor</button>
+  <br />
+  <input v-my-directive="total" :value="total" />
+  <button @click="add">add+1</button>
   <Hello :msg="msg" @change-msg="changeMsg" ref="hello" />
   <div @click="exposeFun">exposeFun</div>
   <Test1 class="my-class" title="标题" />
@@ -12,7 +15,7 @@
     </template>
   </Test2>
   <Test3 />
-  <Test4 title="我是title" name="title" />
+  <Test4 title="我是title" name="title" ref="testRef" />
   <hr />
   <Form.T1>
     <Form.T2>2</Form.T2>
@@ -20,7 +23,7 @@
   </Form.T1>
 </template>
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { getCurrentInstance, onMounted, ref } from 'vue'
 import Hello from './hello.vue'
 import Test1 from './test1.vue'
 import Test2 from './test2.vue'
@@ -38,6 +41,9 @@ interface Props {
   list: ListType[]
 }
 const hello = ref<any>(null)
+
+// 获取 Test4 组件实例
+const testRef = ref<any>(null)
 // const prop = defineProps<{ msg: string; title: string; list: ListType[] }>() //无默认值
 const props = withDefaults(defineProps<Props>(), { title: '标题1' })
 const title = 1
@@ -51,6 +57,7 @@ const changeMsg = (v: string) => {
 
 onMounted(() => {
   console.log(hello.value.title)
+  console.log(testRef.value.$attrs.name)
 })
 const exposeFun = () => {
   hello.value.exposeFun('标题2')
@@ -59,10 +66,32 @@ const exposeFun = () => {
 const theme = {
   color: 'pink'
 }
+const color = ref('red')
+const changeColor = () => {
+  color.value = 'pink'
+}
+
 const total = ref(10)
+const vMyDirective = {
+  beforeMount: (el: { style: { borderColor: string } }, binding: any, vnode: any) => {
+    el.style.borderColor = 'red'
+  },
+  updated(el: { value: number; style: { borderColor: string } }, binding: any, vnode: any) {
+    if (el.value % 2 !== 0) {
+      el.style.borderColor = 'blue'
+    } else {
+      el.style.borderColor = 'red'
+    }
+  }
+}
+
 const add = () => {
   total.value++
 }
+
+// 获取当前组件的实例对象，相当于 vue2 的 this
+const instance = getCurrentInstance()
+console.log(instance)
 </script>
 <style lang="less" scoped>
 .title {
