@@ -92,6 +92,17 @@ const add = () => {
 // 获取当前组件的实例对象，相当于 vue2 的 this
 const instance = getCurrentInstance()
 console.log(instance)
+
+const Fun = (s: string, k: number) => {
+  let arr: string[] = []
+  let res: string[] = []
+  arr = s.split(' ')
+  res = arr.filter((v, i) => {
+    return i < k ? v : ''
+  })
+  console.log(res.join(' '))
+}
+Fun('Hello how are you Contestant', 4)
 </script>
 <style lang="less" scoped>
 .title {
