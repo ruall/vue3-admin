@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import router from './router/index'
+// import store from './store/index'
 import store from './store/index'
 import auth from './components/directive'
 import App from './App.vue'

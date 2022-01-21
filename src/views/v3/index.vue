@@ -21,6 +21,10 @@
     <Form.T2>2</Form.T2>
     <Form.T3>3</Form.T3>
   </Form.T1>
+
+  <hr />
+  <div>count:{{ counter.count }}</div>
+  <div>name:{{ userStore.name }}</div>
 </template>
 <script setup lang="ts">
 import { getCurrentInstance, onMounted, ref } from 'vue'
@@ -30,6 +34,8 @@ import Test2 from './test2.vue'
 import Test3 from './test3.vue'
 import Test4 from './test4.vue'
 import * as Form from './form'
+import useCounterStore from '/@/store/modules/counter'
+import userUserStore from '/@/store/modules/user'
 
 interface ListType {
   name: string
@@ -40,6 +46,17 @@ interface Props {
   title?: string
   list: ListType[]
 }
+
+const counter = useCounterStore()
+setTimeout(() => {
+  counter.increment()
+}, 2000)
+
+const userStore = userUserStore()
+setTimeout(() => {
+  userStore.name = '李四'
+}, 3000)
+
 const hello = ref<any>(null)
 
 // 获取 Test4 组件实例
