@@ -7,7 +7,7 @@
     <MySelect :data="data" :current-index="curIndex" :callback="setOption" />
   </div>
 
-  <div>vuex中count:{{ count }}</div>
+  <!-- <div>vuex中count:{{ count }}</div> -->
   <router-link to="/login">登录</router-link>
 
   <div class="container">
@@ -20,12 +20,12 @@
 </template>
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { useStore } from 'vuex'
+// import { useStore } from 'vuex'
 import carouselData from '../../data/carousel'
 import _ from 'lodash'
 
-const store = useStore()
-const count = store.state.count
+// const store = useStore()
+// const count = store.state.count
 
 const btnClick = (e: object) => {
   console.log(e)
@@ -90,6 +90,33 @@ console.log(bound('!!'))
 const func = _.nthArg(-3)
 
 console.log(func('a', 'b', 'c', 'd'))
+
+const arrs = [
+  { id: 1, name: '部门1', pid: 0 },
+  { id: 2, name: '部门2', pid: 1 },
+  { id: 3, name: '部门3', pid: 2 },
+  { id: 4, name: '部门4', pid: 3 },
+  { id: 5, name: '部门5', pid: 4 }
+]
+
+const getChildren = (arr: any, res: any, pid: number) => {
+  for (const item of arr) {
+    if (item.pid === pid) {
+      const newItem = { ...item, children: [] }
+      res.push(newItem)
+      getChildren(arr, newItem.children, item.id)
+    }
+  }
+}
+
+const arrToTree = (arr: any, pid: any) => {
+  const res: any = []
+  getChildren(arr, res, pid)
+  console.log(res)
+  return res
+}
+
+arrToTree(arrs, 0)
 </script>
 
 <style lang="less" scoped>

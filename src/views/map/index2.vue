@@ -15,9 +15,9 @@
       <div class="search" :class="showList ? 'hasList' : ''">
         <div class="replace"></div>
         <div class="input">
-          <input type="text" v-model="searchTxt" placeholder="搜索地点" ref="searchRef" />
+          <input ref="searchRef" v-model="searchTxt" type="text" placeholder="搜索地点" />
         </div>
-        <div class="list" v-show="showList">
+        <div v-show="showList" class="list">
           <ul>
             <li v-for="item in list" :key="item.place_id" @click="setPlace(item.place_id)">
               <div>
@@ -36,8 +36,8 @@ import { defineComponent, reactive, ref, toRefs, watch } from 'vue'
 import { GoogleMap, Marker } from 'vue3-google-map'
 
 export default defineComponent({
-  components: { GoogleMap, Marker },
   name: '',
+  components: { GoogleMap, Marker },
   setup() {
     const mapRef = ref(null)
     const searchRef = ref(null)

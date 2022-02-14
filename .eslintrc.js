@@ -6,7 +6,8 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
       tsx: true
-    }
+    },
+    ignorePatterns: ['node_modules/']
   },
   env: {
     browser: true,
@@ -14,5 +15,5 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   extends: ['plugin:@typescript-eslint/recommended', 'plugin:vue/vue3-recommended', 'plugin:prettier/recommended'],
-  rules: { '@typescript-eslint/ban-ts-comment': 'off' }
+  rules: { '@typescript-eslint/ban-ts-comment': 'off', 'vue/require-default-prop': 'off' }
 }

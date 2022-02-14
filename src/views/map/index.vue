@@ -83,8 +83,8 @@ import { defineComponent, ref, toRefs, watch } from 'vue'
 import Maps from './static/map'
 
 export default defineComponent({
-  components: {},
   name: '',
+  components: {},
   setup() {
     const searchRef = ref(null)
     const { center, markers, addMarker } = Maps()

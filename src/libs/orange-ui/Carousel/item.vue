@@ -1,6 +1,6 @@
 <template>
   <transition :name="setName">
-    <div class="carousel-item" v-if="selfIndex === currentIndex">
+    <div v-if="selfIndex === currentIndex" class="carousel-item">
       <slot></slot>
     </div>
   </transition>

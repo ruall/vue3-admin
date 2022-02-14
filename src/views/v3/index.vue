@@ -5,7 +5,7 @@
   <br />
   <input v-my-directive="total" :value="total" />
   <button @click="add">add+1</button>
-  <Hello :msg="msg" @change-msg="changeMsg" ref="hello" />
+  <Hello ref="hello" :msg="msg" @change-msg="changeMsg" />
   <div @click="exposeFun">exposeFun</div>
   <Test1 class="my-class" title="标题" />
   <Test2>
@@ -15,7 +15,7 @@
     </template>
   </Test2>
   <Test3 />
-  <Test4 title="我是title" name="title" ref="testRef" />
+  <Test4 ref="testRef" title="我是title" name="title" />
   <hr />
   <Form.T1>
     <Form.T2>2</Form.T2>
