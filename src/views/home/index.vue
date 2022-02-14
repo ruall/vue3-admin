@@ -7,7 +7,7 @@
     <MySelect :data="data" :current-index="curIndex" :callback="setOption" />
   </div>
 
-  <!-- <div>vuex中count:{{ count }}</div> -->
+  <div>vuex中count:{{ count }}</div>
   <router-link to="/login">登录</router-link>
 
   <div class="container">
@@ -21,11 +21,15 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 // import { useStore } from 'vuex'
+import useCounterStore from '/@/store/modules/counter'
+import { storeToRefs } from 'pinia'
 import carouselData from '../../data/carousel'
 import _ from 'lodash'
 
 // const store = useStore()
 // const count = store.state.count
+
+const { count } = storeToRefs(useCounterStore())
 
 const btnClick = (e: object) => {
   console.log(e)
@@ -52,7 +56,7 @@ const data = reactive([
 
 const curIndex = ref(1)
 
-const setOption = (index: any, item: any) => {
+const setOption = (index: number, item: object) => {
   console.log(index, item)
 }
 
@@ -78,7 +82,7 @@ done()
 const arr = _.map(['6', '8', '10'], _.ary(parseInt, 1))
 console.log(arr)
 
-const greet = function (this: any, greeting: string, punctuation: string) {
+const greet = function (this: { user: string }, greeting: string, punctuation: string) {
   return greeting + ' ' + this.user + punctuation
 }
 
@@ -91,6 +95,9 @@ const func = _.nthArg(-3)
 
 console.log(func('a', 'b', 'c', 'd'))
 
+/**
+ * 数组类型转tree
+ */
 const arrs = [
   { id: 1, name: '部门1', pid: 0 },
   { id: 2, name: '部门2', pid: 1 },
@@ -99,7 +106,15 @@ const arrs = [
   { id: 5, name: '部门5', pid: 4 }
 ]
 
-const getChildren = (arr: any, res: any, pid: number) => {
+/**
+ * 方式一 递归
+ */
+interface arrType {
+  id: number
+  name: string
+  pid: number
+}
+const getChildren = (arr: arrType[], res: arrType[], pid: number) => {
   for (const item of arr) {
     if (item.pid === pid) {
       const newItem = { ...item, children: [] }
@@ -109,14 +124,97 @@ const getChildren = (arr: any, res: any, pid: number) => {
   }
 }
 
-const arrToTree = (arr: any, pid: any) => {
-  const res: any = []
+const arrToTree = (arr: arrType[], pid: number) => {
+  const res: arrType[] = []
   getChildren(arr, res, pid)
   console.log(res)
   return res
 }
 
 arrToTree(arrs, 0)
+
+/**
+ * 方式二 不用递归，两次遍历
+ */
+interface treeType {
+  id: number
+  pid: number
+  children?: treeType[]
+}
+
+const arrayToTree = (items: treeType[]) => {
+  const res = []
+  const itemMap: treeType[] = []
+
+  for (const item of items) {
+    itemMap[item.id] = { ...item, children: [] }
+  }
+
+  for (const item of items) {
+    const id = item.id
+    const pid = item.pid
+    const treeItem = itemMap[id]
+    if (pid === 0) {
+      res.push(treeItem)
+    } else {
+      if (!itemMap[pid]) {
+        itemMap[pid] = {
+          id,
+          pid,
+          children: []
+        }
+      }
+      ;(itemMap[pid].children as treeType[]).push(treeItem)
+    }
+  }
+  console.log(res)
+  return res
+}
+arrayToTree(arrs)
+
+/**
+ * 方式三 不用递归，一次遍历
+ */
+const arrToTree1 = (items: treeType[]) => {
+  const res = []
+  const itemMap = []
+
+  for (const item of items) {
+    const id = item.id
+    const pid = item.pid
+
+    if (!itemMap[id]) {
+      itemMap[id] = {
+        id,
+        pid,
+        children: []
+      }
+    }
+
+    itemMap[id] = {
+      ...item,
+      children: itemMap[id]['children']
+    }
+
+    const treeItem = itemMap[id]
+
+    if (pid === 0) {
+      res.push(treeItem)
+    } else {
+      if (!itemMap[pid]) {
+        itemMap[pid] = {
+          id,
+          pid,
+          children: []
+        }
+      }
+      ;(itemMap[pid].children as treeType[]).push(treeItem)
+    }
+  }
+  console.log(res)
+  return res
+}
+arrToTree1(arrs)
 </script>
 
 <style lang="less" scoped>
