@@ -9,7 +9,8 @@
 
   <div>vuex中count:{{ count }}</div>
   <router-link to="/login">登录</router-link>
-
+  <hr />
+  <el-button type="primary" round>默认按钮</el-button>
   <div class="container">
     <Carousel :autoplay="true" :duration="5000" :initial="0" :has-dot="true" :has-director="true" dot-bg-color="#000">
       <carouselItem v-for="(item, index) in carouselData" :key="index">
