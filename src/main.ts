@@ -16,6 +16,9 @@ import MyUI from './modules/my-ui'
 import { MyButton } from './modules/my-ui'
 import './modules/my-ui/common.css'
 
+//引入xl-ui
+import XlUI from './libs/xl-ui'
+
 const app = createApp(App)
 
 app.use(MyUI, {
@@ -23,4 +26,4 @@ app.use(MyUI, {
 })
 
 app.use(MyButton)
-app.use(router).use(Antd).use(OrangeUI).use(store).use(auth).mount('#app')
+app.use(router).use(Antd).use(OrangeUI).use(XlUI).use(store).use(auth).mount('#app')
