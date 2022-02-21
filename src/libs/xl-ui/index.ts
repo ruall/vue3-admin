@@ -2,6 +2,7 @@ import TreeMenu from './TreeMenu/index.vue'
 import MenuItem from './TreeMenu/MenuItem.vue'
 import SubMenu from './TreeMenu/SubMenu.vue'
 import ReSubMenu from './TreeMenu/ReSubMenu.vue'
+import Modal from './TreeMenu/Modal.vue'
 
 import './resets.css'
 
@@ -12,6 +13,7 @@ XlUI.install = function (Vue: { component: (arg0: any, arg1: any) => void }) {
   Vue.component(MenuItem.name, MenuItem)
   Vue.component(SubMenu.name, SubMenu)
   Vue.component(ReSubMenu.name, ReSubMenu)
+  Vue.component(Modal.name, Modal)
 }
 
 export default XlUI

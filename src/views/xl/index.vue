@@ -9,6 +9,22 @@
       </template>
     </tree-menu>
   </div>
+  <Modal
+    :show="true"
+    :width="500"
+    :border-radius="10"
+    header-color="orange"
+    header-text="Dialog Tips"
+    header-text-color="#333"
+    content-text="This is a dialog Content"
+    content-text-color="#333"
+    position="center"
+    :btn-group-show="true"
+    confirm-text="yes"
+    cancel-text="no"
+    @confirm="confirmFun"
+    @cancel="cancelFun"
+  />
 </template>
 <script lang="ts">
 export default {
@@ -17,6 +33,14 @@ export default {
 </script>
 <script setup lang="ts">
 import MenuData from '/@/data/menu'
+
+const confirmFun = (formData: object) => {
+  console.log(formData)
+  console.log('confirm')
+}
+const cancelFun = () => {
+  console.log('cancel')
+}
 </script>
 <style lang="less" scoped>
 .side-bar {
