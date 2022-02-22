@@ -26,6 +26,7 @@
                 电话：<span>{{phone}}</span>
             </p>
         </div>
+        <button id="btn">修改</button>
     </div>
     <script src="./index.js"></script>
     <script>
@@ -33,6 +34,9 @@
             name: '',
             age: '',
             phone: ''
+        })
+        document.querySelector('#btn').addEventListener('click',function() {
+            app.setData('name','张三')
         })
     </script>
 </body>
